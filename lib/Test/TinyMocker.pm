@@ -8,7 +8,7 @@ use Carp qw{ croak };
 use vars qw(@EXPORT $VERSION);
 use base 'Exporter';
 
-$VERSION = '0.02';
+$VERSION = '0.03';
 my $mocks = {};
 
 @EXPORT = qw(mock unmock should method);
@@ -109,24 +109,23 @@ Version 0.02
 
     # Some::Module::some_method() will now always return $mocked_value;
 
-	# To restore the original method
-	
-	unmock 'Some::Module::some_method';
+    # To restore the original method
 
-	# or
+    unmock 'Some::Module::some_method';
+
+    # or
 	
-	unmock 'Some::Module' => method 'some_method';
-	
+    unmock 'Some::Module' => method 'some_method';
 
 =head1 EXPORT
 
 =head2 mock($module, $method, $sub)
 
 This function allows you to overwrite the given method with an arbitrary code
-block. This lets you simulate soem kind of behaviour for your tests.
+block. This lets you simulate some kind of behaviour for your tests.
 
 Alternatively, this method can be passed only two arguments, the first one will
-be the full path of the method (pcakge name + method name) and the second one
+be the full path of the method (packge name + method name) and the second one
 the coderef.
 
 Syntactic sugar is provided (C<method> and C<should>) in order to let you write
@@ -145,6 +144,8 @@ sweet mock statements:
     mock('Foo::Bar::a_method', sub { return 42;});
 
 =head2 unmock($module, $method)
+
+This function will restore original behaviour of a mocked method.
 
 Syntactic sugar is provided (C<method>) in order to let you write sweet unmock
 statements:
@@ -166,6 +167,8 @@ Syntactic sugar for mock()
 =head1 AUTHOR
 
 Alexis Sukrieh, C<< <sukria at sukria.net> >>
+
+Jerome Bourgeois, C<< <melkor at uroshnor.net> >>
 
 =head1 BUGS
 
